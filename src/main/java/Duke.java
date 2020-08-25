@@ -10,12 +10,22 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Duke.greet();
+
         Scanner in = new Scanner(System.in);
         String command = in.nextLine();
+        String[] list = new String[100];
+        int number = 0;
+
         while (!command.equals("bye")) {
-            Duke.echo(command);
+            if (command.equals("list")) {
+                Duke.displayList(list, number);
+            } else {
+                Duke.add(list, command, number);
+                number++;
+            }
             command = in.nextLine();
         }
+
         Duke.exit();
     }
 
@@ -26,9 +36,18 @@ public class Duke {
         Duke.printLine();
     }
 
-    public static void echo(String command) {
+    public static void displayList(String[] list, int number) {
         Duke.printLine();
-        System.out.println("\t" + command);
+        for(int i=1; i<=number; i++) {
+            System.out.println("\t" + i + ". " + list[i-1]);
+        }
+        Duke.printLine();
+    }
+
+    public static void add(String[] list, String text, int number) {
+        list[number] = text;
+        Duke.printLine();
+        System.out.println("\t" + "added: " + text);
         Duke.printLine();
     }
 
