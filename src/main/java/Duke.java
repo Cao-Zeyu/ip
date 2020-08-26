@@ -13,14 +13,17 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         String command = in.nextLine();
-        String[] list = new String[100];
+        Task[] list = new Task[100];
         int number = 0;
 
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 Duke.displayList(list, number);
+            } else if (command.startsWith("done")){
+                Duke.done(list, command, number);
             } else {
-                Duke.add(list, command, number);
+                list[number] = new Task(command);
+                Duke.add(command);
                 number++;
             }
             command = in.nextLine();
@@ -36,16 +39,28 @@ public class Duke {
         Duke.printLine();
     }
 
-    public static void displayList(String[] list, int number) {
+    public static void displayList(Task[] list, int number) {
         Duke.printLine();
+        System.out.println("\tHere are the tasks in your list:");
         for(int i=1; i<=number; i++) {
-            System.out.println("\t" + i + ". " + list[i-1]);
+            System.out.println("\t" + i + ". "
+                    + "[" + list[i-1].getStatusIcon() + "] "
+                    + list[i-1].description);
         }
         Duke.printLine();
     }
 
-    public static void add(String[] list, String text, int number) {
-        list[number] = text;
+    public static void done(Task[] list, String command, int number) {
+        int doneNumber = Integer.parseInt(command.substring(5));
+        list[doneNumber-1].isDone = true;
+        Duke.printLine();
+        System.out.println("\tNice! I've marked this task as done: ");
+        System.out.println("\t   "+ "[" + list[doneNumber-1].getStatusIcon() + "] "
+                + list[doneNumber-1].description);
+        Duke.printLine();
+    }
+
+    public static void add(String text) {
         Duke.printLine();
         System.out.println("\t" + "added: " + text);
         Duke.printLine();
