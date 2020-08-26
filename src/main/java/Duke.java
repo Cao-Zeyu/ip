@@ -8,14 +8,11 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-
         Duke.greet();
-
         Scanner in = new Scanner(System.in);
         String command = in.nextLine();
         Task[] list = new Task[100];
         int number = 0;
-
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 Duke.displayList(list, number);
@@ -28,7 +25,6 @@ public class Duke {
             }
             command = in.nextLine();
         }
-
         Duke.exit();
     }
 
