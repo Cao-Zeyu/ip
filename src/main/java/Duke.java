@@ -6,7 +6,10 @@ public class Duke {
     public static final int SKIP_DONE_NUMBER = 5;
     public static final int SKIP_SEPARATION_NUMBER = 4;
 
-    public static void main(String[] args) {
+    public static Task[] list = new Task[100];
+    public static int number = 0;
+
+    public static void main(String[] args) throws DukeException{
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -18,31 +21,25 @@ public class Duke {
         String command = in.nextLine();
         String description;
         String time;
-        Task[] list = new Task[100];
         int separatePosition;
-        int number = 0;
+
         while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                Duke.displayList(list, number);
-            } else if (command.startsWith("done")) {
-                Duke.done(list, command, number);
-            } else if (command.startsWith("todo")) {
-                list[number] = new ToDo(command.substring(5));
-                number = Duke.add(list[number], number);
-            } else if (command.startsWith("deadline")) {
-                separatePosition = command.indexOf('/');
-                description = command.substring(SKIP_DEADLINE_NUMBER, separatePosition-1);
-                time = command.substring(separatePosition+SKIP_SEPARATION_NUMBER);
-                list[number] = new Deadline(description, time);
-                number = Duke.add(list[number], number);
-            } else if (command.startsWith("event")) {
-                separatePosition = command.indexOf('/');
-                description = command.substring(SKIP_EVENT_NUMBER, separatePosition-1);
-                time = command.substring(separatePosition+SKIP_SEPARATION_NUMBER);
-                list[number] = new Event(description, time);
-                number = Duke.add(list[number], number);
-            } else {
-                Duke.commandAgain();
+            try {
+                if (command.equals("list")) {
+                    Duke.displayList(list, number);
+                } else if (command.startsWith("done")) {
+                    Duke.done(list, command, number);
+                } else if (command.startsWith("todo")) {
+                    Duke.addTodo(command);
+                } else if (command.startsWith("deadline")) {
+                    Duke.addDeadline(command);
+                } else if (command.startsWith("event")) {
+                    Duke.addEvent(command);
+                } else {
+                    throw new DukeException();
+                }
+            } catch(DukeException e) {
+                    Duke.commandAgain(command);
             }
             command = in.nextLine();
         }
@@ -56,8 +53,22 @@ public class Duke {
         Duke.printLine();
     }
 
-    public static void commandAgain() {
+    public static void commandAgain(String command) {
         Duke.printLine();
+        switch(command) {
+        case "todo":
+            System.out.println("\t🙁 OOPS!!! The description of a todo cannot be empty.");
+            break;
+        case "deadline":
+            System.out.println("\t🙁 OOPS!!! The description of a deadline cannot be empty.");
+            break;
+        case "event":
+            System.out.println("\t🙁 OOPS!!! The description of a event cannot be empty.");
+            break;
+        default:
+            System.out.println("\t🙁 OOPS!!! I'm sorry, but I don't know what that means :-(");
+            break;
+        }
         System.out.println("\tPlease give a valid command!");
         Duke.printLine();
     }
@@ -79,6 +90,37 @@ public class Duke {
         Duke.printLine();
         return number+1;
     }
+
+    public static void addTodo (String command) throws DukeException {
+        if(command.equals("todo")) {
+            throw new DukeException();
+        }
+        list[number] = new ToDo(command.substring(5));
+        number = Duke.add(list[number], number);
+    }
+
+    public static void addDeadline(String command) throws DukeException{
+        if(command.equals("deadline")) {
+            throw new DukeException();
+        }
+        int separatePosition = command.indexOf('/');
+        String description = command.substring(SKIP_DEADLINE_NUMBER, separatePosition-1);
+        String byTime = command.substring(separatePosition+SKIP_SEPARATION_NUMBER);
+        list[number] = new Deadline(description, byTime);
+        number = Duke.add(list[number], number);
+    }
+
+    public static void addEvent(String command) throws DukeException{
+        if(command.equals("event")) {
+            throw new DukeException();
+        }
+        int separatePosition = command.indexOf('/');
+        String description = command.substring(SKIP_EVENT_NUMBER, separatePosition-1);
+        String atTime = command.substring(separatePosition+SKIP_SEPARATION_NUMBER);
+        list[number] = new Event(description, atTime);
+        number = Duke.add(list[number], number);
+    }
+
 
     public static void done(Task[] list, String command, int number) {
         int doneNumber = Integer.parseInt(command.substring(SKIP_DONE_NUMBER));
