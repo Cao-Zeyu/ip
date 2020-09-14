@@ -14,7 +14,7 @@ public class Duke {
     public static Task[] list = new Task[100];
     public static int number = 0;
 
-    public static void main(String[] args) throws DukeException{
+    public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -24,9 +24,6 @@ public class Duke {
         Duke.greet();
         Scanner in = new Scanner(System.in);
         String command = in.nextLine();
-        String description;
-        String time;
-        int separatePosition;
 
         while (!command.equals("bye")) {
             try {
