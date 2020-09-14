@@ -4,6 +4,7 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static final int SKIP_DEADLINE_NUMBER = 9;
@@ -11,8 +12,9 @@ public class Duke {
     public static final int SKIP_DONE_NUMBER = 5;
     public static final int SKIP_SEPARATION_NUMBER = 4;
 
-    public static Task[] list = new Task[100];
-    public static int number = 0;
+    //public static Task[] list = new Task[100];
+    public static ArrayList<Task> list = new ArrayList<>();
+    //public static int number = 0;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -28,9 +30,11 @@ public class Duke {
         while (!command.equals("bye")) {
             try {
                 if (command.equals("list")) {
-                    Duke.displayList(list, number);
+                    Duke.displayList(list);
                 } else if (command.startsWith("done")) {
-                    Duke.done(list, command, number);
+                    Duke.done(list, command);
+                } else if (command.startsWith("delete")) {
+                    Duke.delete(command);
                 } else if (command.startsWith("todo")) {
                     Duke.addTodo(command);
                 } else if (command.startsWith("deadline")) {
@@ -75,30 +79,39 @@ public class Duke {
         Duke.printLine();
     }
 
-    public static void displayList(Task[] list, int number) {
+    public static void displayList(ArrayList<Task> list) {
         Duke.printLine();
         System.out.println("\tHere are the tasks in your list:");
-        for(int i=1; i<=number; i++) {
-            System.out.println("\t" + i + ". " + list[i-1].toString());
+//        for(int i=1; i<=number; i++) {
+//            System.out.println("\t" + i + ". " + list[i-1].toString());
+//        }
+//        int i = 1;
+//        for(Task task : list) {
+//            System.out.println("\t" + (i++) +". " + task.toString());
+//        }
+        for(int i=1; i<=list.size(); i++) {
+            System.out.println("\t" + i + ". " + list.get(i-1).toString());
         }
         Duke.printLine();
     }
 
-    public static int add(Task task, int number) {
+    public static void printAdd(Task task) {
         Duke.printLine();
         System.out.println("\tGot it. I've added this task: ");
         System.out.println("\t   " + task.toString());
-        System.out.println("\tNow you have " + (number+1) + " tasks in the list. ");
+        System.out.println("\tNow you have " + (list.size()) + " tasks in the list. ");
         Duke.printLine();
-        return number+1;
     }
 
     public static void addTodo (String command) throws DukeException {
         if(command.equals("todo")) {
             throw new DukeException();
         }
-        list[number] = new ToDo(command.substring(5));
-        number = Duke.add(list[number], number);
+//        list[number] = new ToDo(command.substring(5));
+//        number = Duke.add(list[number], number);
+
+        list.add(new ToDo(command.substring(5)));
+        Duke.printAdd(list.get(list.size()-1));
     }
 
     public static void addDeadline(String command) throws DukeException{
@@ -108,8 +121,12 @@ public class Duke {
         int separatePosition = command.indexOf('/');
         String description = command.substring(SKIP_DEADLINE_NUMBER, separatePosition-1);
         String byTime = command.substring(separatePosition+SKIP_SEPARATION_NUMBER);
-        list[number] = new Deadline(description, byTime);
-        number = Duke.add(list[number], number);
+//        list[number] = new Deadline(description, byTime);
+//        number = Duke.add(list[number], number);
+
+        list.add(new Deadline(description, byTime));
+        //number = Duke.add(list.get(number), number);//need to check code quality later
+        Duke.printAdd(list.get(list.size()-1));
     }
 
     public static void addEvent(String command) throws DukeException{
@@ -119,17 +136,35 @@ public class Duke {
         int separatePosition = command.indexOf('/');
         String description = command.substring(SKIP_EVENT_NUMBER, separatePosition-1);
         String atTime = command.substring(separatePosition+SKIP_SEPARATION_NUMBER);
-        list[number] = new Event(description, atTime);
-        number = Duke.add(list[number], number);
+//        list[number] = new Event(description, atTime);
+//        number = Duke.add(list[number], number);
+
+        list.add(new Event(description, atTime));
+        //number = Duke.add(list.get(number), number);
+        Duke.printAdd(list.get(list.size()-1));
     }
 
 
-    public static void done(Task[] list, String command, int number) {
+    public static void done(ArrayList<Task> list, String command) {
         int doneNumber = Integer.parseInt(command.substring(SKIP_DONE_NUMBER));
-        list[doneNumber-1].setDone(true);
+//        list[doneNumber-1].setDone(true);
+        Task doneTask = list.get(doneNumber-1);
+        doneTask.setDone(true);
+        list.set(doneNumber-1, doneTask);
         Duke.printLine();
         System.out.println("\tNice! I've marked this task as done: ");
-        System.out.println("\t   " + list[doneNumber-1].toString());
+        System.out.println("\t   " + doneTask.toString());
+        Duke.printLine();
+    }
+
+    public static void delete(String command) {
+        int deleteIndex = Integer.parseInt(command.substring(7));
+        Task deletedTask = list.get(deleteIndex-1);
+        Duke.printLine();
+        System.out.println("\tNoted. I've removed this task: ");
+        System.out.println("\t   " + deletedTask.toString());
+        list.remove(deleteIndex-1);
+        System.out.println("\tNow you have " + list.size() + " tasks in the list.");
         Duke.printLine();
     }
 
