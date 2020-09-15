@@ -5,16 +5,21 @@ import duke.task.ToDo;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
 
 public class FileSaver {
-    public static final String filePath = "data/duke.txt";
+    public static final String filePath = "duke.txt";
 
-    public static void loadData(ArrayList<Task> list) throws FileNotFoundException {
+    public static void loadData(ArrayList<Task> list) throws IOException {
         File dataFile = new File(filePath);
+        if(dataFile.createNewFile()) {
+            Duke.printLine();
+            System.out.println("\tSince the file does not exist, I have created a file for you.");
+            Duke.printLine();
+        }
         Scanner dataScanner = new Scanner(dataFile);
         while(dataScanner.hasNext()) {
             String data = dataScanner.nextLine();

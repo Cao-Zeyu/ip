@@ -15,7 +15,6 @@ public class Duke {
     public static final int SKIP_SEPARATION_NUMBER = 4;
 
     public static ArrayList<Task> list = new ArrayList<>();
-    public static int number = 0;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -28,9 +27,9 @@ public class Duke {
 
         try {
             FileSaver.loadData(list);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             Duke.printLine();
-            System.out.println("\t🙁 OOPS!!! The file data.txt cannot be found.");
+            System.out.println("\t🙁 OOPS!!! ");//IOException occurs.
             Duke.printLine();
         }
 
@@ -64,7 +63,6 @@ public class Duke {
             }
             command = in.nextLine();
         }
-
         Duke.exit();
     }
 
@@ -98,13 +96,6 @@ public class Duke {
     public static void displayList(ArrayList<Task> list) {
         Duke.printLine();
         System.out.println("\tHere are the tasks in your list:");
-//        for(int i=1; i<=number; i++) {
-//            System.out.println("\t" + i + ". " + list[i-1].toString());
-//        }
-//        int i = 1;
-//        for(Task task : list) {
-//            System.out.println("\t" + (i++) +". " + task.toString());
-//        }
         for(int i=1; i<=list.size(); i++) {
             System.out.println("\t" + i + ". " + list.get(i-1).toString());
         }
@@ -123,9 +114,6 @@ public class Duke {
         if(command.equals("todo")) {
             throw new DukeException();
         }
-//        list[number] = new ToDo(command.substring(5));
-//        number = Duke.add(list[number], number);
-
         list.add(new ToDo(command.substring(5)));
         Duke.printAdd(list.get(list.size()-1));
     }
@@ -137,11 +125,7 @@ public class Duke {
         int separatePosition = command.indexOf('/');
         String description = command.substring(SKIP_DEADLINE_NUMBER, separatePosition-1);
         String byTime = command.substring(separatePosition+SKIP_SEPARATION_NUMBER);
-//        list[number] = new Deadline(description, byTime);
-//        number = Duke.add(list[number], number);
-
         list.add(new Deadline(description, byTime));
-        //number = Duke.add(list.get(number), number);//need to check code quality later
         Duke.printAdd(list.get(list.size()-1));
     }
 
@@ -152,18 +136,12 @@ public class Duke {
         int separatePosition = command.indexOf('/');
         String description = command.substring(SKIP_EVENT_NUMBER, separatePosition-1);
         String atTime = command.substring(separatePosition+SKIP_SEPARATION_NUMBER);
-//        list[number] = new Event(description, atTime);
-//        number = Duke.add(list[number], number);
-
         list.add(new Event(description, atTime));
-        //number = Duke.add(list.get(number), number);
         Duke.printAdd(list.get(list.size()-1));
     }
 
-
     public static void done(ArrayList<Task> list, String command) {
         int doneNumber = Integer.parseInt(command.substring(SKIP_DONE_NUMBER));
-//        list[doneNumber-1].setDone(true);
         Task doneTask = list.get(doneNumber-1);
         doneTask.setDone(true);
         list.set(doneNumber-1, doneTask);
