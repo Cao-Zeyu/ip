@@ -13,5 +13,62 @@ Hello from
 	Here are the tasks in your list:
 	___________________________________________
 	___________________________________________
+	Got it. I've added this task: 
+	   [T][✘] read book
+	Now you have 1 tasks in the list. 
+	___________________________________________
+	___________________________________________
+	Got it. I've added this task: 
+	   [D][✘] return book (by: June 6th)
+	Now you have 2 tasks in the list. 
+	___________________________________________
+	___________________________________________
+	Got it. I've added this task: 
+	   [E][✘] project meeting (at: Aug 6th 2-4pm)
+	Now you have 3 tasks in the list. 
+	___________________________________________
+	___________________________________________
+	Got it. I've added this task: 
+	   [T][✘] join sports club
+	Now you have 4 tasks in the list. 
+	___________________________________________
+	___________________________________________
+	Here are the tasks in your list:
+	1. [T][✘] read book
+	2. [D][✘] return book (by: June 6th)
+	3. [E][✘] project meeting (at: Aug 6th 2-4pm)
+	4. [T][✘] join sports club
+	___________________________________________
+	___________________________________________
+	Nice! I've marked this task as done: 
+	   [T][✓] read book
+	___________________________________________
+	___________________________________________
+	Nice! I've marked this task as done: 
+	   [D][✓] return book (by: June 6th)
+	___________________________________________
+	___________________________________________
+	Here are the tasks in your list:
+	1. [T][✓] read book
+	2. [D][✓] return book (by: June 6th)
+	3. [E][✘] project meeting (at: Aug 6th 2-4pm)
+	4. [T][✘] join sports club
+	___________________________________________
+	___________________________________________
+	Noted. I've removed this task: 
+	   [E][✘] project meeting (at: Aug 6th 2-4pm)
+	Now you have 3 tasks in the list.
+	___________________________________________
+	___________________________________________
+	Here are the tasks in your list:
+	1. [T][✓] read book
+	2. [D][✓] return book (by: June 6th)
+	3. [T][✘] join sports club
+	___________________________________________
+	___________________________________________
+	🙁 OOPS!!! I'm sorry, but I don't know what that means :-(
+	Please give a valid command!
+	___________________________________________
+	___________________________________________
 	Bye. Hope to see you again soon!
 	___________________________________________

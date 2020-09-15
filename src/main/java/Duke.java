@@ -3,6 +3,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -22,6 +24,15 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         Duke.greet();
+
+        try {
+            number = FileSaver.loadData(list);
+        } catch (FileNotFoundException e) {
+            Duke.printLine();
+            System.out.println("\t🙁 OOPS!!! The file data.txt cannot be found.");
+            Duke.printLine();
+        }
+
         Scanner in = new Scanner(System.in);
         String command = in.nextLine();
 
@@ -40,11 +51,17 @@ public class Duke {
                 } else {
                     throw new DukeException();
                 }
+                FileSaver.saveData(list, number);
             } catch(DukeException e) {
                     Duke.commandAgain(command);
+            } catch (IOException e) {
+                Duke.printLine();
+                System.out.println("\t🙁 OOPS!!! IOException occurs.");
+                Duke.printLine();
             }
             command = in.nextLine();
         }
+
         Duke.exit();
     }
 

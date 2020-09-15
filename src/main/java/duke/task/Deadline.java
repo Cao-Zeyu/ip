@@ -13,4 +13,8 @@ public class Deadline extends Task {
     public String toString(){
         return "[D]" + super.toString() + " (by: " + byTime + ")";
     }
+
+    public String toDataString() {
+        return "D" + super.toDataString() + " | " + byTime;
+    }
 }

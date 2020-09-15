@@ -24,4 +24,12 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
+
+    public String getStatusData() {
+        return (isDone ? "1" : "0");
+    }
+
+    public String toDataString() {
+        return " | " + getStatusData() + " | " + description;
+    }
 }
