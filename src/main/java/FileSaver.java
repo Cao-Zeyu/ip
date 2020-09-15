@@ -3,6 +3,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,9 +12,8 @@ import java.io.FileWriter;
 
 public class FileSaver {
     public static final String filePath = "data/duke.txt";
-    public static int dataNumber = 0;
 
-    public static int loadData(Task[] list) throws FileNotFoundException {
+    public static void loadData(ArrayList<Task> list) throws FileNotFoundException {
         File dataFile = new File(filePath);
         Scanner dataScanner = new Scanner(dataFile);
         while(dataScanner.hasNext()) {
@@ -44,31 +44,29 @@ public class FileSaver {
             default:
                 break;
             }
-            dataNumber++;
         }
-        return dataNumber;
     }
 
-    public static void saveData(Task[] list, int number) throws IOException {
+    public static void saveData(ArrayList<Task> list) throws IOException {
         FileWriter dataWriter = new FileWriter(filePath);
-        for (int i = 0; i < number; i++) {
-            dataWriter.write(list[i].toDataString() + "\n");
+        for (int i = 0; i < list.size(); i++) {
+            dataWriter.write(list.get(i).toDataString() + "\n");
         }
         dataWriter.close();
     }
 
-    public static void fileAddTodo(Task[] list, String description, boolean isDone) {
-        list[dataNumber] = new ToDo(description);
-        list[dataNumber].setDone(isDone);
+    public static void fileAddTodo(ArrayList<Task> list, String description, boolean isDone) {
+        list.add(new ToDo(description));
+        list.get(list.size()-1).setDone(isDone);
     }
 
-    public static void fileAddDeadline(Task[] list, String description, String byTime, boolean isDone) {
-        list[dataNumber] = new Deadline(description, byTime);
-        list[dataNumber].setDone(isDone);
+    public static void fileAddDeadline(ArrayList<Task> list, String description, String byTime, boolean isDone) {
+        list.add(new Deadline(description, byTime));
+        list.get(list.size()-1).setDone(isDone);
     }
 
-    public static void fileAddEvent(Task[] list, String description, String atTime, boolean isDone) {
-        list[dataNumber] = new Event(description, atTime);
-        list[dataNumber].setDone(isDone);
+    public static void fileAddEvent(ArrayList<Task> list, String description, String atTime, boolean isDone) {
+        list.add(new Event(description, atTime));
+        list.get(list.size()-1).setDone(isDone);
     }
 }

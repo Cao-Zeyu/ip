@@ -14,9 +14,8 @@ public class Duke {
     public static final int SKIP_DONE_NUMBER = 5;
     public static final int SKIP_SEPARATION_NUMBER = 4;
 
-    //public static Task[] list = new Task[100];
     public static ArrayList<Task> list = new ArrayList<>();
-    //public static int number = 0;
+    public static int number = 0;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -28,7 +27,7 @@ public class Duke {
         Duke.greet();
 
         try {
-            number = FileSaver.loadData(list);
+            FileSaver.loadData(list);
         } catch (FileNotFoundException e) {
             Duke.printLine();
             System.out.println("\t🙁 OOPS!!! The file data.txt cannot be found.");
@@ -55,7 +54,7 @@ public class Duke {
                 } else {
                     throw new DukeException();
                 }
-                FileSaver.saveData(list, number);
+                FileSaver.saveData(list);
             } catch(DukeException e) {
                     Duke.commandAgain(command);
             } catch (IOException e) {
