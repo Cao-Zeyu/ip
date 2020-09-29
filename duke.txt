@@ -1,4 +1,2 @@
-T | 1 | read book
-D | 0 | return book | June 6th
-E | 0 | project meeting | Aug 6th 2-4pm
-T | 1 | join sports club
+D | 0 | unit2 quiz | 2359
+E | 0 | assessment | 10am
