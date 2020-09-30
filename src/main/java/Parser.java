@@ -5,14 +5,13 @@ public class Parser {
         String commandKeyWord;
         if (userInput.equals("list") || userInput.equals("bye") ) {
             commandKeyWord = userInput;
+        } else if (!userInput.contains(" ")) { //if the user input is not "list" or "bye", but there is no further message
+            throw new DukeException();
         } else {
             lengthOfCommandKeyWord = userInput.indexOf(' ');
             commandKeyWord = userInput.substring(0, lengthOfCommandKeyWord);
         }
 
-        if (lengthOfCommandKeyWord+1 > userInput.length()) {
-            throw new DukeException();
-        }
         String commandMessage = userInput.substring(lengthOfCommandKeyWord+1);
         switch (commandKeyWord) {
         case "todo":
@@ -25,13 +24,16 @@ public class Parser {
             parseEventCommand(commandMessage);
             break;
         case "list":
-            TaskList.displayList();
+            parseListCommand();
             break;
         case "done":
             parseDoneCommand(commandMessage);
             break;
         case "delete":
             parseDeleteCommand(commandMessage);
+            break;
+        case "find":
+            parseFindCommand(commandMessage);
             break;
         default:
             break;
@@ -56,6 +58,10 @@ public class Parser {
         TaskList.addEvent(description, atTime);
     }
 
+    private static void parseListCommand() {
+        TaskList.getWholeList();
+    }
+
     private static void parseDoneCommand(String commandMessage) {
         int doneIndex = Integer.parseInt(commandMessage);
         TaskList.setDone(doneIndex);
@@ -64,5 +70,9 @@ public class Parser {
     private static void parseDeleteCommand(String commandMessage) {
         int deletedIndex = Integer.parseInt(commandMessage);
         TaskList.delete(deletedIndex);
+    }
+
+    private static void parseFindCommand(String commandMessage) {
+        TaskList.getMatchingTask(commandMessage);
     }
 }

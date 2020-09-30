@@ -34,7 +34,11 @@ public class Duke {
 
         do {
             commandText = in.nextLine();
-            Parser.parseCommand(commandText);
+            try {
+                Parser.parseCommand(commandText);
+            } catch (DukeException e) {
+                ui.printInvalidInputMessage(commandText);
+            }
         } while (!commandText.equals("bye"));
 
         Storage.saveData(tasks);
