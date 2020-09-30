@@ -5,14 +5,13 @@ public class Parser {
         String commandKeyWord;
         if (userInput.equals("list") || userInput.equals("bye") ) {
             commandKeyWord = userInput;
+        } else if (!userInput.contains(" ")) { //if the user input is not "list" or "bye", but there is no further message
+            throw new DukeException();
         } else {
             lengthOfCommandKeyWord = userInput.indexOf(' ');
             commandKeyWord = userInput.substring(0, lengthOfCommandKeyWord);
         }
 
-        if (lengthOfCommandKeyWord+1 > userInput.length()) {
-            throw new DukeException();
-        }
         String commandMessage = userInput.substring(lengthOfCommandKeyWord+1);
         switch (commandKeyWord) {
         case "todo":

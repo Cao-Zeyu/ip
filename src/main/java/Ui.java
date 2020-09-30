@@ -29,28 +29,54 @@ public class Ui {
         printLine();
     }
 
+    public static void printInvalidInputMessage(String input) {
+        printLine();
+        switch (input) {
+        case "todo":
+            System.out.println("\t" + "🙁 OOPS!!! The description of a todo cannot be empty.");
+            break;
+        case "deadline":
+            System.out.println("\t" + "🙁 OOPS!!! The description of a deadline cannot be empty.");
+            break;
+        case "event":
+            System.out.println("\t" + "🙁 OOPS!!! The description of a event cannot be empty.");
+            break;
+        case "done":
+        case "delete":
+            System.out.println("\t" + "🙁 OOPS!!! The index of the task cannot be empty.");
+            break;
+        case "find":
+            System.out.println("\t" + "🙁 OOPS!!! The keyword for finding cannot be empty.");
+            break;
+        default:
+            System.out.println("\t" + "🙁 OOPS!!! I'm sorry, but I don't know what that means :-(");
+            break;
+        }
+        printLine();
+    }
+
     public static void printLine() {
         System.out.println("\t" + "___________________________________________");
     }
 
     public static void printAddMessage(Task task) {
         printLine();
-        System.out.println("\tGot it. I've added this task: ");
+        System.out.println("\t" + "Got it. I've added this task: ");
         System.out.println("\t   " + task.toString());
-        System.out.println("\tNow you have " + (TaskList.getSize()) + " tasks in the list. ");
+        System.out.println("\t" + "Now you have " + (TaskList.getSize()) + " tasks in the list. ");
         printLine();
     }
 
     public static void printDoneMessage(Task doneTask) {
         printLine();
-        System.out.println("\tNice! I've marked this task as done: ");
+        System.out.println("\t" + "Nice! I've marked this task as done: ");
         System.out.println("\t   " + doneTask.toString());
         printLine();
     }
 
     public static void printDeletedMessage(Task deletedTask) {
         printLine();
-        System.out.println("\tNoted. I've removed this task: ");
+        System.out.println("\t" + "Noted. I've removed this task: ");
         System.out.println("\t   " + deletedTask.toString());
         System.out.println("\tNow you have " + (TaskList.getSize()-1) + " tasks in the list.");
         printLine();
@@ -58,15 +84,21 @@ public class Ui {
 
     public static void printCompleteList(ArrayList<Task> completeList) {
         printLine();;
-        System.out.println("\tHere are the tasks in your list: ");
+        System.out.println("\t" + "Here are the tasks in your list: ");
         displayList(completeList);
         printLine();
     }
 
     public static void printMatchingList(ArrayList<Task> matchingList) {
         printLine();
-        System.out.println("\tHere are the matching tasks in your list: ");
+        System.out.println("\t" + "Here are the matching tasks in your list: ");
         displayList(matchingList);
+        printLine();
+    }
+
+    public static void printNoMatchingMessage() {
+        printLine();
+        System.out.println("\t" + "There is no matching task... ");
         printLine();
     }
 

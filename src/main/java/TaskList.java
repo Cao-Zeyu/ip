@@ -55,7 +55,11 @@ public class TaskList {
                 matchingTaskList.add(task);
             }
         }
-        Ui.printMatchingList(matchingTaskList);
+        if (matchingTaskList.size() != 0) {
+            Ui.printMatchingList(matchingTaskList);
+        } else {
+            Ui.printNoMatchingMessage();
+        }
     }
 
     public static int getSize() {
