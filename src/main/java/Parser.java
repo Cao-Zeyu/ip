@@ -2,7 +2,7 @@ public class Parser {
 
     /**
      * Parses the input command into a format that can be recognized by the program.
-     * Except "list" and "bye" commands, all other commands must be followed by further information.
+     * Except "help", "list" and "bye" commands, all other commands must be followed by further information.
      * If there is no followings, or the input is not a command for this program, it will throw a DukeException.
      *
      * @param userInput the string that user inputs as command
@@ -11,7 +11,7 @@ public class Parser {
     public static void parseCommand(String userInput) throws DukeException {
         int lengthOfCommandKeyWord = 0;
         String commandKeyWord;
-        if (userInput.equals("list") || userInput.equals("bye") ) {
+        if (userInput.equals("help") || userInput.equals("list") || userInput.equals("bye") ) {
             commandKeyWord = userInput;
         } else if (!userInput.contains(" ")) {
             throw new DukeException();
@@ -29,6 +29,9 @@ public class Parser {
             break;
         case "event":
             parseEventCommand(commandMessage);
+            break;
+        case "help":
+            parseHelpCommand();
             break;
         case "list":
             parseListCommand();
@@ -63,6 +66,10 @@ public class Parser {
         String description = commandMessage.substring(0, atTimePosition-5);
         String atTime = commandMessage.substring(atTimePosition);
         TaskList.addEvent(description, atTime);
+    }
+
+    private  static void parseHelpCommand() {
+        Ui.printHelp();
     }
 
     private static void parseListCommand() {

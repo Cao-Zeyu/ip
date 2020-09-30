@@ -159,4 +159,29 @@ public class Ui {
         System.out.println("\t" + "There is no matching task... ");
         printLine();
     }
+
+    /**
+     * Prints all the valid input commands for the user to understand how to use Duke.
+     */
+    public static void printHelp() {
+        printLine();
+        System.out.println("\t" + "Here are some available commands " +
+                "and their corresponding input format: " + System.lineSeparator());
+        System.out.println("\t" + "Listing all the tasks: `list` " +
+                "\n\t" + "Format: `list`" + System.lineSeparator());
+        System.out.println("\t" + "Adding a todo task: `todo` " +
+                "\n\t" + "Format: `todo TASK`" + System.lineSeparator());
+        System.out.println("\t" + "Adding a deadline task: `deadline` " +
+                "\n\t" + "Format: `deadline TASK /by BYTIME`" + System.lineSeparator());
+        System.out.println("\t" + "Adding an event task: `event` " +
+                "\n\t" + "Format: `event TASK /by ATTIME`" + System.lineSeparator());
+        System.out.println("\t" + "Marking a task as done: `done` " +
+                "\n\t" + "Format: `done INDEX`" + System.lineSeparator());
+        System.out.println("\t" + "Deleting a task: `delete` " +
+                "\n\t" + "Format: `delete INDEX`" + System.lineSeparator());
+        System.out.println("\t" + "Finding a task: `find` " +
+                "\n\t" + "Format: `find KEYWORD`" + System.lineSeparator());
+        System.out.println("\t" + "Exiting Duke: `bye` " + "\n\t" + "Format: `bye`");
+        printLine();
+    }
 }
