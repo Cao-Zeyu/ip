@@ -7,6 +7,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a Duke object containing tasks stored at a certain address.
+     *
+     * @param filePath the address of the file containing a list of tasks
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,17 +23,32 @@ public class Duke {
         }
     }
 
-    public void run() throws DukeException, IOException {
+    /**
+     * Runs the Duke program.
+     *
+     * @throws IOException the exception that occurs when encountered with problems in writing to
+     * or reading from a file
+     */
+    public void run() throws IOException {
         start();
         runUntilExit();
         exit();
     }
 
+    /**
+     * Starts the program by printing greeting lines.
+     */
     private void start() {
         ui.printGreetings();
     }
 
-    private void runUntilExit() throws DukeException, IOException {
+    /**
+     * Keeps looping the program to receive commands from user until the user inputs to exit the program.
+     *
+     * @throws IOException the exception that occurs when encountered with problems in writing to
+     * or reading from a file
+     */
+    private void runUntilExit() throws IOException {
         Scanner in = new Scanner(System.in);
         String commandText;
 
@@ -41,9 +61,12 @@ public class Duke {
             }
         } while (!commandText.equals("bye"));
 
-        Storage.saveData(tasks);
+        storage.saveData(tasks);
     }
 
+    /**
+     * Exits the program by printing goodbye message.
+     */
     private void exit() {
         ui.printGoodbye();
         System.exit(0);

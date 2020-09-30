@@ -1,17 +1,24 @@
 public class Parser {
 
+    /**
+     * Parses the input command into a format that can be recognized by the program.
+     * Except "list" and "bye" commands, all other commands must be followed by further information.
+     * If there is no followings, or the input is not a command for this program, it will throw a DukeException.
+     *
+     * @param userInput the string that user inputs as command
+     * @throws DukeException an exception that occurs when an invalid command is input
+     */
     public static void parseCommand(String userInput) throws DukeException {
         int lengthOfCommandKeyWord = 0;
         String commandKeyWord;
         if (userInput.equals("list") || userInput.equals("bye") ) {
             commandKeyWord = userInput;
-        } else if (!userInput.contains(" ")) { //if the user input is not "list" or "bye", but there is no further message
+        } else if (!userInput.contains(" ")) {
             throw new DukeException();
         } else {
             lengthOfCommandKeyWord = userInput.indexOf(' ');
             commandKeyWord = userInput.substring(0, lengthOfCommandKeyWord);
         }
-
         String commandMessage = userInput.substring(lengthOfCommandKeyWord+1);
         switch (commandKeyWord) {
         case "todo":
