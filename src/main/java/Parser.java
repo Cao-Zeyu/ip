@@ -25,13 +25,16 @@ public class Parser {
             parseEventCommand(commandMessage);
             break;
         case "list":
-            TaskList.displayList();
+            parseListCommand();
             break;
         case "done":
             parseDoneCommand(commandMessage);
             break;
         case "delete":
             parseDeleteCommand(commandMessage);
+            break;
+        case "find":
+            parseFindCommand(commandMessage);
             break;
         default:
             break;
@@ -56,6 +59,10 @@ public class Parser {
         TaskList.addEvent(description, atTime);
     }
 
+    private static void parseListCommand() {
+        TaskList.getWholeList();
+    }
+
     private static void parseDoneCommand(String commandMessage) {
         int doneIndex = Integer.parseInt(commandMessage);
         TaskList.setDone(doneIndex);
@@ -64,5 +71,9 @@ public class Parser {
     private static void parseDeleteCommand(String commandMessage) {
         int deletedIndex = Integer.parseInt(commandMessage);
         TaskList.delete(deletedIndex);
+    }
+
+    private static void parseFindCommand(String commandMessage) {
+        TaskList.getMatchingTask(commandMessage);
     }
 }

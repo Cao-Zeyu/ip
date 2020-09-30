@@ -1,5 +1,7 @@
 import duke.task.Task;
 
+import java.util.ArrayList;
+
 public class Ui {
 
     public static void printGreetings() {
@@ -52,5 +54,25 @@ public class Ui {
         System.out.println("\t   " + deletedTask.toString());
         System.out.println("\tNow you have " + (TaskList.getSize()-1) + " tasks in the list.");
         printLine();
+    }
+
+    public static void printCompleteList(ArrayList<Task> completeList) {
+        printLine();;
+        System.out.println("\tHere are the tasks in your list: ");
+        displayList(completeList);
+        printLine();
+    }
+
+    public static void printMatchingList(ArrayList<Task> matchingList) {
+        printLine();
+        System.out.println("\tHere are the matching tasks in your list: ");
+        displayList(matchingList);
+        printLine();
+    }
+
+    public static void displayList(ArrayList<Task> list) {
+        for(int i=1; i<=list.size(); i++) {
+            System.out.println("\t" + i + ". " + list.get(i-1).toString());
+        }
     }
 }

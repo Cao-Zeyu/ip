@@ -31,13 +31,8 @@ public class TaskList {
         Ui.printAddMessage(list.get(list.size()-1));
     }
 
-    public static void displayList() {
-        Ui.printLine();
-        System.out.println("\tHere are the tasks in your list:");
-        for(int i=1; i<=list.size(); i++) {
-            System.out.println("\t" + i + ". " + list.get(i-1).toString());
-        }
-        Ui.printLine();
+    public static void getWholeList() {
+        Ui.printCompleteList(list);
     }
 
     public static void setDone(int doneIndex) {
@@ -53,12 +48,18 @@ public class TaskList {
         list.remove(deletedIndex-1);
     }
 
-    public static int getSize() {
-        return list.size();
+    public static void getMatchingTask(String taskKeyword) {
+        ArrayList<Task> matchingTaskList = new ArrayList<>();
+        for(Task task : list) {
+            if (task.getDescription().contains(taskKeyword)) {
+                matchingTaskList.add(task);
+            }
+        }
+        Ui.printMatchingList(matchingTaskList);
     }
 
-    public static Task getTask(int taskIndex) {
-        return list.get(taskIndex);
+    public static int getSize() {
+        return list.size();
     }
 
     public static ArrayList<Task> getList() {
