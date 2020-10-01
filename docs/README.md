@@ -8,8 +8,8 @@ Duke is an application that is designed to help users to keep track of different
 
 1. Ensure you have Java 11 or above installed in your computer.
 1. Download the latest CS2113_IP.jar from [here](https://github.com/Cao-Zeyu/ip/releases/tag/A-Release).
-1. Copy the file to the folder you want to use as the howe folder for your Duke.
-1. Double-click the file to start the app.
+1. Copy the file to the folder you want to use as the home folder for your Duke.
+1. Double-click the file and open a command window in the home folder to run the jar file.
 
 ## Features
 #### Providing help information: `help`
