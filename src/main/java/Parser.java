@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Parser {
 
     /**
@@ -55,17 +58,21 @@ public class Parser {
     }
 
     private static void parseDeadlineCommand(String commandMessage) {
-        int byTimePosition = commandMessage.indexOf("/")+4;
-        String description = commandMessage.substring(0, byTimePosition-5);
-        String byTime = commandMessage.substring(byTimePosition);
-        TaskList.addDeadline(description, byTime);
+        int byDatePosition = commandMessage.indexOf("/")+4;
+        int byTimePosition = commandMessage.indexOf(" ", byDatePosition)+1;
+        String description = commandMessage.substring(0, byDatePosition-5);
+        LocalDate byDate = LocalDate.parse(commandMessage.substring(byDatePosition, byTimePosition-1));
+        LocalTime byTime = LocalTime.parse(commandMessage.substring(byTimePosition));
+        TaskList.addDeadline(description, byDate, byTime);
     }
 
     private static void parseEventCommand(String commandMessage) {
-        int atTimePosition = commandMessage.indexOf("/")+4;
-        String description = commandMessage.substring(0, atTimePosition-5);
-        String atTime = commandMessage.substring(atTimePosition);
-        TaskList.addEvent(description, atTime);
+        int atDatePosition = commandMessage.indexOf("/")+4;
+        int atTimePosition = commandMessage.indexOf(" ", atDatePosition)+1;
+        String description = commandMessage.substring(0, atDatePosition-5);
+        LocalDate atDate = LocalDate.parse(commandMessage.substring(atDatePosition, atTimePosition-1));
+        LocalTime atTime = LocalTime.parse(commandMessage.substring(atTimePosition));
+        TaskList.addEvent(description, atDate, atTime);
     }
 
     private  static void parseHelpCommand() {

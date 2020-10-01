@@ -82,7 +82,7 @@ public class Ui {
     public static void printAddMessage(Task task) {
         printLine();
         System.out.println("\t" + "Got it. I've added this task: ");
-        System.out.println("\t   " + task.toString());
+        System.out.println("\t   " + task.toOutputString());
         System.out.println("\t" + "Now you have " + (TaskList.getSize()) + " tasks in the list. ");
         printLine();
     }
@@ -96,7 +96,7 @@ public class Ui {
     public static void printDoneMessage(Task doneTask) {
         printLine();
         System.out.println("\t" + "Nice! I've marked this task as done: ");
-        System.out.println("\t   " + doneTask.toString());
+        System.out.println("\t   " + doneTask.toOutputString());
         printLine();
     }
 
@@ -109,7 +109,7 @@ public class Ui {
     public static void printDeletedMessage(Task deletedTask) {
         printLine();
         System.out.println("\t" + "Noted. I've removed this task: ");
-        System.out.println("\t   " + deletedTask.toString());
+        System.out.println("\t   " + deletedTask.toOutputString());
         System.out.println("\tNow you have " + (TaskList.getSize()-1) + " tasks in the list.");
         printLine();
     }
@@ -123,7 +123,7 @@ public class Ui {
      */
     public static void displayList(ArrayList<Task> list) {
         for(int i=1; i<=list.size(); i++) {
-            System.out.println("\t" + i + ". " + list.get(i-1).toString());
+            System.out.println("\t" + i + ". " + list.get(i-1).toOutputString());
         }
     }
 
@@ -172,9 +172,9 @@ public class Ui {
         System.out.println("\t" + "Adding a todo task: `todo` " +
                 "\n\t" + "Format: `todo TASK`" + System.lineSeparator());
         System.out.println("\t" + "Adding a deadline task: `deadline` " +
-                "\n\t" + "Format: `deadline TASK /by BYTIME`" + System.lineSeparator());
+                "\n\t" + "Format: `deadline TASK /by YYYY-MM-DD HOUR:MINUTE`" + System.lineSeparator());
         System.out.println("\t" + "Adding an event task: `event` " +
-                "\n\t" + "Format: `event TASK /by ATTIME`" + System.lineSeparator());
+                "\n\t" + "Format: `event TASK /by YYYY-MM-DD HOUR:MINUTE`" + System.lineSeparator());
         System.out.println("\t" + "Marking a task as done: `done` " +
                 "\n\t" + "Format: `done INDEX`" + System.lineSeparator());
         System.out.println("\t" + "Deleting a task: `delete` " +

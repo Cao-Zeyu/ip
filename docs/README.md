@@ -74,27 +74,27 @@ ___________________________________________
 
 #### Adding a deadline task: `deadline`
 * Adds a deadline task which has to be done by a certain time.
-* Format：`deadline TASK /by BYTIME`
-* Example: `deadline return the book /by 10 Oct`
+* Format：`deadline TASK /by YYYY-MM-DD HOUR:MINUTE`
+* Example: `ddeadline submit report /by 2020-10-03 14:59`
 * Example of expected output:
 ```
 	___________________________________________
 	Got it. I've added this task: 
-	   [D][✘] return the book (by: 10 Oct)
-	Now you have 5 tasks in the list. 
+	   [D][✘] submit report (by: Oct 03 2020 14:59)
+	Now you have 1 tasks in the list. 
 	___________________________________________
 ```
 
 #### Adding an event task: `event`
 * Adds an event task which will happen at a certain time.
-* Format：`event TASK /by ATTIME`
-* Example: `event group meeting /at 11am Thursday`
+* Format：`event TASK /by YYYY-MM-DD HOUR:MINUTE`
+* Example: `event project meeting /at 2020-10-06 11:00`
 * Example of expected output:
 ```
 	___________________________________________
 	Got it. I've added this task: 
-	   [E][✘] group meeting (at: 11am Thursday)
-	Now you have 6 tasks in the list. 
+	   [E][✘] project meeting (at: Oct 06 2020 11:00)
+	Now you have 2 tasks in the list. 
 	___________________________________________
 ```
 

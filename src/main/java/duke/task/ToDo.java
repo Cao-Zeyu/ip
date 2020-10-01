@@ -6,8 +6,8 @@ public class ToDo extends Task {
         super(description);
     }
 
-    public String toString(){
-        return "[T]" + super.toString();
+    public String toOutputString(){
+        return "[T]" + super.toOutputString();
     }
 
     public String toDataString() {

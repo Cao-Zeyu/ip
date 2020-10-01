@@ -26,21 +26,17 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
-//    public String getStatusIcon() {
-//        return (isDone ? "Y" : "N");
-//    }
+    public String getStatusData() {
+        return (isDone ? "1" : "0");
+    }
 
     /**
      * Returns the string format of the task to output the task when the program is running.
      *
      * @return the string format of this task with its status and description for output
      */
-    public String toString() {
+    public String toOutputString() {
         return "[" + getStatusIcon() + "] " + description;
-    }
-
-    public String getStatusData() {
-        return (isDone ? "1" : "0");
     }
 
     /**

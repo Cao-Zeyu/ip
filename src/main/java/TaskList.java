@@ -3,7 +3,10 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
+
+import java.time.LocalDate;
 
 public class TaskList {
     public static ArrayList<Task> list;
@@ -40,8 +43,8 @@ public class TaskList {
      * @param description the description for this added deadline task obtained by parsing the input command
      * @param byTime the deadline for this added deadline task obtained by parsing the input command
      */
-    public static void addDeadline(String description, String byTime) {
-        list.add(new Deadline(description, byTime));
+    public static void addDeadline(String description, LocalDate byDate, LocalTime byTime) {
+        list.add(new Deadline(description, byDate, byTime));
         Ui.printAddMessage(list.get(list.size()-1));
     }
 
@@ -49,10 +52,11 @@ public class TaskList {
      * Adds a event task into the task list and confirms the adding bu printing a message.
      *
      * @param description the description for this added event task obtained by parsing the input command
-     * @param atTime the deadline for this added event task obtained by parsing the input command
+     * @param atDate the occur dat for this added event task obtained by parsing the input command
+     * @param atTime the occur time for this added event task obtained by parsing the input command
      */
-    public static void addEvent(String description, String atTime) {
-        list.add(new Event(description, atTime));
+    public static void addEvent(String description, LocalDate atDate, LocalTime atTime) {
+        list.add(new Event(description, atDate, atTime));
         Ui.printAddMessage(list.get(list.size()-1));
     }
 

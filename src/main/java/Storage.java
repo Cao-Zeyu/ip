@@ -3,12 +3,15 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+
+import java.time.LocalDate;
 
 public class Storage {
     public static String filePath;
@@ -40,28 +43,36 @@ public class Storage {
         Scanner dataScanner = new Scanner(dataFile);
         while (dataScanner.hasNext()) {
             String data = dataScanner.nextLine();
-            String type = data.substring(0, 1);
-            boolean isDone = data.charAt(4) == '1';
-            String content = data.substring(8);
+            String type = data.substring(0, 1);//task type length = 1
+            boolean isDone = data.charAt(4) == '1';//status index = 4
+            String content = data.substring(8);//description starts index = 8
             String description = content;
-            String byTime;
-            String atTime;
-            int separateIndex = content.length() - 1;
-            if (content.contains("|")) {
-                separateIndex = content.indexOf("|");
-                description = content.substring(0, separateIndex - 1);
+            String dateAndTime = "";
+            LocalDate byDate;
+            LocalTime byTime;
+            LocalDate atDate;
+            LocalTime atTime;
+            int dateAndTimeIndex;
+            if (content.contains("|")) {//have date and time
+                dateAndTimeIndex = content.indexOf("|") + 2;
+                description = content.substring(0, dateAndTimeIndex - 3);
+                dateAndTime = content.substring(dateAndTimeIndex);
             }
             switch (type) {
             case "T":
                 fileAddTodo(list, description, isDone);
                 break;
             case "D":
-                byTime = content.substring(separateIndex + 2);
-                fileAddDeadline(list, description, byTime, isDone);
+                int byTimeIndex = dateAndTime.indexOf(" ")+1;
+                byDate = LocalDate.parse(dateAndTime.substring(0, byTimeIndex-1));
+                byTime = LocalTime.parse(dateAndTime.substring(byTimeIndex));
+                fileAddDeadline(list, description, byDate, byTime, isDone);
                 break;
             case "E":
-                atTime = content.substring(separateIndex + 2);
-                fileAddEvent(list, description, atTime, isDone);
+                int atTimeIndex = dateAndTime.indexOf(" ")+1;
+                atDate = LocalDate.parse(dateAndTime.substring(0, atTimeIndex-1));
+                atTime = LocalTime.parse(dateAndTime.substring(atTimeIndex));
+                fileAddEvent(list, description, atDate, atTime, isDone);
                 break;
             default:
                 break;
@@ -101,11 +112,13 @@ public class Storage {
      *
      * @param list the list that stores all the tasks
      * @param description the string that describe this deadline task
-     * @param byTime the string that indicates when this deadline task needs to be done by
+     * @param byDate the data when this deadline ends
+     * @param byTime the time when this deadline ends
      * @param isDone the status of this deadline tasks
      */
-    public static void fileAddDeadline(ArrayList<Task> list, String description, String byTime, boolean isDone) {
-        list.add(new Deadline(description, byTime));
+    public static void fileAddDeadline(ArrayList<Task> list, String description,
+                                       LocalDate byDate, LocalTime byTime, boolean isDone) {
+        list.add(new Deadline(description, byDate, byTime));
         list.get(list.size()-1).setDone(isDone);
     }
 
@@ -114,11 +127,13 @@ public class Storage {
      *
      * @param list the list that stores all the tasks
      * @param description the string that describe this event task
-     * @param atTime the string that indicates when this event occurs
+     * @param atDate the data when this event occurs
+     * @param atTime the time when this event occurs
      * @param isDone the status of this event tasks
      */
-    public static void fileAddEvent(ArrayList<Task> list, String description, String atTime, boolean isDone) {
-        list.add(new Event(description, atTime));
+    public static void fileAddEvent(ArrayList<Task> list, String description,
+                                    LocalDate atDate, LocalTime atTime, boolean isDone) {
+        list.add(new Event(description, atDate, atTime));
         list.get(list.size()-1).setDone(isDone);
     }
 }
