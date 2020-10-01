@@ -41,7 +41,8 @@ public class TaskList {
      * Adds a deadline task into the task list and confirms the adding bu printing a message.
      *
      * @param description the description for this added deadline task obtained by parsing the input command
-     * @param byTime the deadline for this added deadline task obtained by parsing the input command
+     * @param byDate the end date for this added deadline task obtained by parsing the input command
+     * @param byTime the end time for this added deadline task obtained by parsing the input command
      */
     public static void addDeadline(String description, LocalDate byDate, LocalTime byTime) {
         list.add(new Deadline(description, byDate, byTime));
@@ -52,7 +53,7 @@ public class TaskList {
      * Adds a event task into the task list and confirms the adding bu printing a message.
      *
      * @param description the description for this added event task obtained by parsing the input command
-     * @param atDate the occur dat for this added event task obtained by parsing the input command
+     * @param atDate the occur date for this added event task obtained by parsing the input command
      * @param atTime the occur time for this added event task obtained by parsing the input command
      */
     public static void addEvent(String description, LocalDate atDate, LocalTime atTime) {

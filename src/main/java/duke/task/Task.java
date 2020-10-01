@@ -22,10 +22,20 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Returns the status icon when outputting the tasks.
+     *
+     * @return a cross if the task is undone, a tick if the task is done
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    /**
+     * Returns the status icon when writing the tasks into the text file.
+     *
+     * @return a "0" if the task is undone, a "1" if the task is done
+     */
     public String getStatusData() {
         return (isDone ? "1" : "0");
     }

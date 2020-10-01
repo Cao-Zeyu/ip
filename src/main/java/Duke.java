@@ -72,7 +72,7 @@ public class Duke {
         System.exit(0);
     }
 
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) throws IOException {
         new Duke("duke.txt").run();
     }
 }

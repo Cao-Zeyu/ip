@@ -112,8 +112,8 @@ public class Storage {
      *
      * @param list the list that stores all the tasks
      * @param description the string that describe this deadline task
-     * @param byDate the data when this deadline ends
-     * @param byTime the time when this deadline ends
+     * @param byDate the data when this deadline task ends
+     * @param byTime the time when this deadline task ends
      * @param isDone the status of this deadline tasks
      */
     public static void fileAddDeadline(ArrayList<Task> list, String description,
@@ -127,8 +127,8 @@ public class Storage {
      *
      * @param list the list that stores all the tasks
      * @param description the string that describe this event task
-     * @param atDate the data when this event occurs
-     * @param atTime the time when this event occurs
+     * @param atDate the data when this event task occurs
+     * @param atTime the time when this event task occurs
      * @param isDone the status of this event tasks
      */
     public static void fileAddEvent(ArrayList<Task> list, String description,
